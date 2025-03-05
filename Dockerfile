@@ -1,3 +1,4 @@
+# Build Stage
 FROM node:22.13.1-alpine AS node
 
 WORKDIR /app
@@ -8,14 +9,13 @@ COPY package.json package-lock.json ./
 
 RUN npm ci
 
-ENV NODE_ENV production
+ENV NODE_ENV=production
 
 COPY . .
 
 RUN npm run build
 
-# ---
-
+# Serve Stage
 FROM ghcr.io/alwatr/nginx-ws:3.5.0
 
-COPY --from=node /app/packages/app/_site/ .
+COPY --from=node /app/_site/ .
