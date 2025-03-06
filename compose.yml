@@ -1,0 +1,23 @@
+networks:
+  internal:
+  alwatr-public-network:
+    name: alwatr-public-network
+    external: true
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    restart: unless-stopped
+
+    environment:
+      - NGINX_DISALLOW_ROBOTS=${appNginxDisallowRobots:-}
+
+    labels:
+      traefik.enable: true
+      traefik.port: 80
+      traefik.frontend.rule: Host:${domain}; PathPrefix:/;
+      traefik.frontend.entryPoints: http, https
+      traefik.frontend.redirect.entryPoint: https
