@@ -12,8 +12,11 @@ services:
 
     restart: unless-stopped
 
+    networks:
+      alwatr-public-network:
+
     environment:
-      - NGINX_DISALLOW_ROBOTS=${appNginxDisallowRobots:-}
+      - NGINX_DISALLOW_ROBOTS=${NGINX_DISALLOW_ROBOTS:-}
 
     labels:
       traefik.enable: true
