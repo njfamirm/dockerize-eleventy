@@ -14,16 +14,9 @@ const numberOfLatestPostsToShow = 3;
 {% set postslistCounter = postsCount %}
 {% include "postslist.njk" %}
 
+<img src="./blog/fourthpost/possum.png" alt="A possum parent and two possum kids hanging from the iconic red balloon">
+
 {% set morePosts = postsCount - numberOfLatestPostsToShow %}
 {% if morePosts > 0 %}
 <p>{{ morePosts }} more post{% if morePosts != 1 %}s{% endif %} can be found in <a href="blog.njk">the archive</a>.</p>
 {% endif %}
-
-{# List every content page in the project #}
-{#
-<ul>
-	{%- for entry in collections.all %}
-	<li><a href="{{ entry.url }}"><code>{{ entry.url }}</code></a></li>
-	{%- endfor %}
-</ul>
-#}
